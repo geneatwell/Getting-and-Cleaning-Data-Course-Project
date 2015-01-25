@@ -1,6 +1,6 @@
 This file describes the data tranformation from the raw data asscociated with the project for the course Getting and Cleaning Data.
 
-The original data come from the "Human Activity Recognition Using Smartphones Dataset" experiment, whose authors are :
+The data originated from the "Human Activity Recognition Using Smartphones Dataset" experiment, whose authors are :
 
 Jorge L. Reyes-Ortiz, Davide Anguita, Alessandro Ghio, Luca Oneto. Smartlab - Non Linear Complex Systems Laboratory DITEN - Universit‡ degli Studi di Genova. Via Opera Pia 11A, I-16145, Genoa, Italy.
 
@@ -35,7 +35,7 @@ fBodyAccJerkMag
 fBodyGyroMag
 fBodyGyroJerkMag 
 
-Since the data column names were in a hard to understand, compressed format, I scrubbed the data to make the Column heading more readable.
+Since the data column names were in a hard to understand, compressed format, I scrubbed the data to make the Column headings more readable.
 
 Additionally, I changed the coded entries of the activities to the actual names of the activities to make it easier to understand what the subject was actually performing.
 
@@ -43,19 +43,21 @@ Lastly, I wrote a summary file that is uploaded to this directory under the name
 
 The variables used in the program run_analysis.R are as follows:
 
-xtest, ytest and test.subject are the files read from the original dataset and bound together using cbind to create the TestSubjectXY file.
+xtest, ytest and test.subject are the files that were read from the original datasets UCI HAR Dataset/test/X_test.txt UCI HAR Dataset/test/Y_test.txt and UCI HAR Dataset/test/subject_test.txt respectively and bound together using cbind to create the TestSubjectXY file.
 
-xtrain, ytrain and train.subject are the files read from the original dataset and bound together using cbind to create the TrainSubjectXY file.
+xtrain, ytrain and train.subject are the files read from the original datasets UCI HAR Dataset/train/X_test.txt UCI HAR Dataset/train/Y_test.txt and UCI HAR Dataset/train/subject_test.txt respectively and bound together using cbind to create the TrainSubjectXY file.
 
-TrainSubjectXY and TestSubjectXY were then bound using rbind to create the file SingleFile.  Duplicate rows are eliminated into the file SingleFileNoDups to create a file that will be parsed for certain variables.
+xtest and xtrain had column headings added that came from the UCI HAR Dataset/features.txt file.  test.subject and train.subject had one variable and they were named Subject.  ytest and ytrain had a single variable whose column was named Activities.
 
-stdmean is created using the SingleFileNoDups file and selecting only columns that contain a mean and standard deviation calculation.
+TrainSubjectXY and TestSubjectXY were then bound using rbind to create the file SingleFile.  Duplicate rows are eliminated from the file into SingleFileNoDups to create a file that will be parsed for certain variables.
 
-ActivityLabels reads in the cryptic names of all the activities performed(numeric and text) and work is done on that file to create understandable, English language labels for the activities.
+stdmean is created using the SingleFileNoDups file and selecting only columns that contain a mean and standard deviation calculation.  In this case, I was looking for std() and mean() in each variable. stdmean is the file with those specific variables included.
 
-MergedData is the data file that contains the merging of stdmean and ActivityLabels.
+ActivityLabels reads in the cryptic names of all the activities performed(numeric and text) from the file UCI HAR Dataset/activity_labels.txt and work is done on that file to create understandable, English language labels for the activities. Specifically, I first eliminated the underscore(_) from all the names in the second column of ActivityLabels, turned all the names into lower case and then capitalized the first letter of each separate word.  The two columns were named Activities and Subject for later merging activities.
 
-Names is a file that was edited to contain column names that are not cryptic and more explanatory.
+MergedData is the data file that contains the merging of stdmean and ActivityLabels.  There is an extra column referring to the coded activities as a numeric value between 1 and 6 and that column is eliminated since it will not be needed.
+
+Names is a file that was edited to contain column names that are not cryptic and more explanatory.  The t was changed to Time, f was changed to Frequency, std() was changed to STD and mean() was changed to Mean. x, y and z were respectively changed to X Axis, Y Axis and Z Axis.  These changes were then added to the measurements they accompanied.  
 
 GroupedBy is the MergedData file grouped by Subject and Activity columns.
 
