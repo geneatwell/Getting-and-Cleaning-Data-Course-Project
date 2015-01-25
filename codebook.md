@@ -40,3 +40,5 @@ Since the data column names were in a hard to understand, compressed format, I s
 Additionally, I changed the coded entries of the activities to the actual names of the activities to make it easier to understand what the subject was actually performing.
 
 Lastly, I wrote a summary file that is uploaded to this directory under the name FinalAnswer.txt
+
+The variables used in the 
