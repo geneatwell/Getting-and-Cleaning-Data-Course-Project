@@ -41,4 +41,27 @@ Additionally, I changed the coded entries of the activities to the actual names 
 
 Lastly, I wrote a summary file that is uploaded to this directory under the name FinalAnswer.txt
 
-The variables used in the 
+The variables used in the program run_analysis.R are as follows:
+
+xtest, ytest and test.subject are the files read from the original dataset and bound together using cbind to create the TestSubjectXY file.
+
+xtrain, ytrain and train.subject are the files read from the original dataset and bound together using cbind to create the TrainSubjectXY file.
+
+TrainSubjectXY and TestSubjectXY were then bound using rbind to create the file SingleFile.  Duplicate rows are eliminated into the file SingleFileNoDups to create a file that will be parsed for certain variables.
+
+stdmean is created using the SingleFileNoDups file and selecting only columns that contain a mean and standard deviation calculation.
+
+ActivityLabels reads in the cryptic names of all the activities performed(numeric and text) and work is done on that file to create understandable, English language labels for the activities.
+
+MergedData is the data file that contains the merging of stdmean and ActivityLabels.
+
+Names is a file that was edited to contain column names that are not cryptic and more explanatory.
+
+GroupedBy is the MergedData file grouped by Subject and Activity columns.
+
+FinalAnswer is the summary of the GroupedBy information applying the mean to each column.
+
+Final Answer.txt is the file containing the required output.
+
+
+
